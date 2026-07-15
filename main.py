@@ -10,7 +10,7 @@ import os
 app = FastAPI(title="SmartPM - Effort Estimation API")
 
 # CORRECTION ICI : __file__ avec DEUX underscores de chaque côté
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "nlp_effort_model.pkl")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "nlp_effort_model_optimized.pkl")
 model = joblib.load(MODEL_PATH)
 
 class TaskInput(BaseModel):
