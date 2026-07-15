@@ -9,8 +9,8 @@ import os
 
 app = FastAPI(title="SmartPM - Effort Estimation API")
 
-# Correction : utilisation de __file__ (avec deux underscores de chaque côté)
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "nlp_effort_model.pkl")
+# CORRECTION ICI : __file__ avec DEUX underscores de chaque côté
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "nlp_effort_model_optimized.pkl")
 model = joblib.load(MODEL_PATH)
 
 class TaskInput(BaseModel):
@@ -31,6 +31,6 @@ def predict(data: TaskInput):
     
     text = f"{data.title} {data.description}".strip()
     prediction = model.predict([text])[0]
-    prediction = max(0, round(float(prediction), 2))
+    prediction = max(0, round(float(prediction), 2))  # jamais négatif
     
     return TaskOutput(predicted_effort_hours=prediction)
